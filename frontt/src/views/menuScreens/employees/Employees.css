@@ -1,0 +1,47 @@
+.textup{
+    padding-right: 5%;
+padding-left: 5%;
+border: red 1px solid;
+background-color: white;
+border-radius: 18px;
+
+padding-top: 10px;
+text-align: right;
+font-size: 22px;
+padding-bottom: 10px;
+}
+.tableandplus{
+    padding-right: 5%;
+    position: relative;
+padding-left: 5%;
+border: #dedede;
+background-color: white;
+border-radius: 18px;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.ttp{
+    flex-direction: row;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    justify-content: space-between;
+    border-radius: 15px;
+    align-items: center;
+}
+.centerimgandtext{
+    display: flex;
+    background-color: #efefef;
+align-items: center;
+justify-content: center;
+border: 1px solid #dedede;
+padding: 8px;
+border-radius: 10px;
+align-content: center;
+}
+.centerimgandtext:hover{
+    cursor: pointer;
+    transform: scale(1.15);
+}

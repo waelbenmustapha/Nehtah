@@ -1,0 +1,9 @@
+.containerr{
+    display: flex;
+}
+.screenNow{
+    height: 100%;
+    padding: 25px;
+    width: 100%;
+    margin-left: 60px;
+}
