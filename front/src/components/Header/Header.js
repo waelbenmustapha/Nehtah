@@ -3,19 +3,11 @@ import {
   ProSidebar,
   Menu,
   MenuItem,
-  SubMenu,
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
-} from "react-icons/fa";
+import { FaTachometerAlt, FaGem } from "react-icons/fa";
 //images
 import logowhite from "../../assets/LogoWhite.png";
 import menu from "../../assets/menu.png";
@@ -23,9 +15,9 @@ import close from "../../assets/close.png";
 import iconbrand from "../../assets/iconbrand.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
-const Header = ({ image, toggled, handleToggleSidebar }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [rtl, setRtl] = useState(false);
+const Header = () => {
+  const [collapsed, setCollapsed] = useState(true);
+  const [rtl] = useState(false);
   return (
     <ProSidebar
       image={false}
@@ -33,7 +25,6 @@ const Header = ({ image, toggled, handleToggleSidebar }) => {
       collapsed={collapsed}
       toggled={true}
       breakPoint="md"
-      onToggle={handleToggleSidebar}
     >
       <SidebarHeader>
         <div className={!collapsed ? "iconwlogo" : "collapseiconwlogo"}>
@@ -53,7 +44,7 @@ const Header = ({ image, toggled, handleToggleSidebar }) => {
       </SidebarHeader>
 
       <SidebarContent>
-      <Menu
+        <Menu
           style={{
             justifyContent: "center",
             alignItems: "center",
@@ -69,7 +60,6 @@ const Header = ({ image, toggled, handleToggleSidebar }) => {
           <MenuItem icon={<FaGem />}>
             العمال <Link to="/dashboard/employees" />
           </MenuItem>
-          
         </Menu>
         <Menu
           style={{
@@ -87,15 +77,29 @@ const Header = ({ image, toggled, handleToggleSidebar }) => {
           <MenuItem icon={<FaGem />}>
             Employees <Link to="/dashboard/employees" />
           </MenuItem>
-          
         </Menu>
-        
       </SidebarContent>
 
-      <SidebarFooter style={{ textAlign: "center",padding:"15px",display:"flex",flexDirection:"row",justifyContent:"center" }}>
-      
-         
-           {!collapsed&&<div className="hoverpointer" style={{marginRight:"5px"}}>خروج</div>}<img className="hoverpointer"  src={iconbrand} style={{height:"25px",width:"25px"}} />
+      <SidebarFooter
+        style={{
+          textAlign: "center",
+          padding: "15px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        {!collapsed && (
+          <div className="hoverpointer" style={{ marginRight: "5px" }}>
+            خروج
+          </div>
+        )}
+        <img
+          alt="exit"
+          className="hoverpointer"
+          src={iconbrand}
+          style={{ height: "25px", width: "25px" }}
+        />
       </SidebarFooter>
     </ProSidebar>
   );

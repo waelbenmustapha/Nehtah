@@ -1,4 +1,3 @@
-import Main from "../views/main/Main";
 import Dashboard from "../views/menuScreens/dashboard/Dashboard";
 import Employees from "../views/menuScreens/employees/Employees";
 import Orders from "../views/menuScreens/orders/Orders";

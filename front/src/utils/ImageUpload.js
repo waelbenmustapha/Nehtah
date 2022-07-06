@@ -27,7 +27,7 @@ function ImageUpload({ setImage, image }) {
   return (
     <div>
       <div>
-        {loading == false ? (
+        {loading === false ? (
           <span
             className="hover"
             onClick={() => {
@@ -35,8 +35,9 @@ function ImageUpload({ setImage, image }) {
             }}
           >
             <img
+            alt="click here to upload"
               src={
-                image.length == 0
+                image.length === 0
                   ? "https://static.thenounproject.com/png/3927-200.png"
                   : image
               }

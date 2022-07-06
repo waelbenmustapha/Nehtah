@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { addEmployeeApi, getEmployees } from "../../../api/Employee";
+import { addEmployeeApi } from "../../../api/Employee";
 import ImageUpload from "../../../utils/ImageUpload";
 import { EmployeeContext } from "../../../contexts/EmployeeContext";
 
@@ -15,7 +15,6 @@ function AddEmployeeModal() {
 
   //Show Hide Modal
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   //Employee initial empty object structure
   const [employeedata, SetEmployeedata] = useState({
@@ -28,8 +27,8 @@ function AddEmployeeModal() {
   //Api to save employee and check inputs
   const handlesaveemployee = async () => {
     if (
-      employeedata.firstname.length == 0 ||
-      employeedata.lastname.length == 0 ||
+      employeedata.firstname.length === 0 ||
+      employeedata.lastname.length === 0 ||
       employeedata.phonenumber.length === 0 ||
       image.length === 0
     ) {

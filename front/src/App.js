@@ -3,11 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { dashboardroutes, routes } from "./utils/routes";
 import Main from "./views/main/Main";
-import { useState } from "react";
 
 const App = () => {
 
-const [isAuth,setisAuth]=useState(true);
   
   const getRoutes = () => {
     return routes.map((route) => {
