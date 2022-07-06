@@ -10,6 +10,20 @@ text-align: right;
 font-size: 22px;
 padding-bottom: 10px;
 }
+.cell{
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+.iconfiltercolor:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    filter: invert(9%) sepia(85%) saturate(4850%) hue-rotate(357deg) brightness(85%) contrast(89%);
+}
+.centertd{
+    text-align: center;
+    vertical-align: center;
+}
 .tableandplus{
     padding-right: 5%;
     position: relative;
