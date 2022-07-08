@@ -1,9 +1,9 @@
 //imports
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { addEmployeeApi } from "../../../api/Employee";
+import { addEmployeeApi, EditEmployeeApi } from "../../../api/Employee";
 import ImageUpload from "../../../utils/ImageUpload";
 import { EmployeeContext } from "../../../contexts/EmployeeContext";
 
@@ -11,18 +11,47 @@ import { EmployeeContext } from "../../../contexts/EmployeeContext";
 
 function AddEmployeeModal() {
   //Getting context state
-  const { show, setShow, getcurrentEmployees } = useContext(EmployeeContext);
+  const {
+    show,
+    setShow,
+    getcurrentEmployees,
+    isEdit,
+    setSelectedEmployee,
+    selectedEmployee,
+  } = useContext(EmployeeContext);
+
+  useEffect(() => {
+    SetEmployeedata(
+      selectedEmployee
+        ? selectedEmployee
+        : {
+            firstname: "",
+            lastname: "",
+            phonenumber: "",
+          }
+    );
+    setImage(selectedEmployee ? selectedEmployee.image : "");
+  }, [show, selectedEmployee]);
 
   //Show Hide Modal
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setSelectedEmployee(null);
+  };
 
   //Employee initial empty object structure
-  const [employeedata, SetEmployeedata] = useState({
-    firstname: "",
-    lastname: "",
-    phonenumber: "",
-  });
-  const [image, setImage] = useState("");
+  const [employeedata, SetEmployeedata] = useState(
+    !selectedEmployee
+      ? {
+          firstname: "",
+          lastname: "",
+          phonenumber: "",
+        }
+      : selectedEmployee
+  );
+  const [image, setImage] = useState(
+    !selectedEmployee ? "" : selectedEmployee.image
+  );
 
   //Api to save employee and check inputs
   const handlesaveemployee = async () => {
@@ -34,9 +63,10 @@ function AddEmployeeModal() {
     ) {
       alert("الرجاء التأكد من المعلومات");
     } else {
+      if(!isEdit){
       await addEmployeeApi({ ...employeedata, image }).then(() => {
         getcurrentEmployees();
-        setShow(false);
+        handleClose();
         SetEmployeedata({
           firstname: "",
           lastname: "",
@@ -44,14 +74,27 @@ function AddEmployeeModal() {
         });
         setImage("");
       });
+    }else{
+      await EditEmployeeApi(selectedEmployee.id,{ ...employeedata, image }).then(() => {
+        getcurrentEmployees();
+        SetEmployeedata({
+          firstname: "",
+          lastname: "",
+          phonenumber: "",
+        });
+        setImage("");
+        handleClose();
+       
+      });
     }
+  }
   };
 
   return (
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>اضافة عامل</Modal.Title>
+          <Modal.Title>{isEdit ? "تعديل عامل" : "اضافة عامل"} </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

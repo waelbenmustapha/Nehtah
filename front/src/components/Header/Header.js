@@ -7,7 +7,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import { FaTachometerAlt, FaGem } from "react-icons/fa";
+import { FaTachometerAlt, FaGem, FaUsers, FaReceipt } from "react-icons/fa";
 //images
 import logowhite from "../../assets/LogoWhite.png";
 import menu from "../../assets/menu.png";
@@ -57,27 +57,19 @@ const Header = () => {
             لوحة القيادة
             <Link to="/dashboard/home" />
           </MenuItem>
-          <MenuItem icon={<FaGem />}>
+          <MenuItem icon={<FaUsers />}>
             العمال <Link to="/dashboard/employees" />
           </MenuItem>
-        </Menu>
-        <Menu
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "center",
-            alignContent: "center",
-          }}
-          iconShape="circle"
-        >
-          <MenuItem icon={<FaTachometerAlt />}>
-            Dashboard
-            <Link to="/dashboard/home" />
+          <MenuItem icon={<FaReceipt />}>
+            الحجوزات
+            <Link to="/dashboard/orders" />
           </MenuItem>
           <MenuItem icon={<FaGem />}>
             Employees <Link to="/dashboard/employees" />
           </MenuItem>
         </Menu>
+       
+         
       </SidebarContent>
 
       <SidebarFooter
@@ -85,6 +77,8 @@ const Header = () => {
           textAlign: "center",
           padding: "15px",
           display: "flex",
+          position:"absolute",
+          bottom:"0px",
           flexDirection: "row",
           justifyContent: "center",
         }}

@@ -69,4 +69,28 @@ public class EmployeeController {
         }
 
     }
+
+    @PutMapping("/edit/{id}")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity EditEmployee(@PathVariable("id") Long id,@RequestBody Employee reqemployee) {
+        if (id != null) {
+            try {
+               Employee employee = employeeRepository.findById(id).get();
+               employee.setFirstname(reqemployee.getFirstname());
+               employee.setLastname(reqemployee.getLastname());
+               employee.setImage(reqemployee.getImage());
+               employee.setPhonenumber(reqemployee.getPhonenumber());
+               employeeRepository.save(employee);
+                return new ResponseEntity("Employee Edited successfully", HttpStatus.OK);
+
+            } catch (Exception e) {
+                return new ResponseEntity("Something went wrong" + e, HttpStatus.INTERNAL_SERVER_ERROR);
+
+            }
+        } else {
+            return new ResponseEntity("id can't be null", HttpStatus.BAD_REQUEST);
+
+        }
+
+    }
 }

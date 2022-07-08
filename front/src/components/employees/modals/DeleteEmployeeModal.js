@@ -9,6 +9,7 @@ function DeleteEmployeeModal() {
 
   const handleOpenClose = () =>{
     setShowDelete(!showDelete)
+    setSelectedEmployee(null)
   }
   const confirmDelete=()=>{
     DeleteEmployee(selectedEmployee.id).then(()=> {handleOpenClose();getcurrentEmployees();setSelectedEmployee(null)}).catch((err)=>alert("an error occured while deleting user "+err))

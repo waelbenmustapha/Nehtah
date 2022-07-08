@@ -2,12 +2,10 @@ package com.bezkoder.springjwt.models;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,5 +25,8 @@ public class Employee {
     private Long phonenumber;
 
     private String image;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Events> events;
 
 }

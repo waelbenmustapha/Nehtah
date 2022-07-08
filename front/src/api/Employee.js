@@ -8,7 +8,7 @@ export const addEmployeeApi = ( data ) => {
       method: 'POST',
       data,
         headers: {
-          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWVsIiwiaWF0IjoxNjU3MDM2NjU0LCJleHAiOjE2NTcxMjMwNTR9.rN592kU1JVQtV3ELlXnFXnvvIu5b0u4ZJ7O982i-7UuwhOO2nDtDT28bn1O8nUSkWYYIbO1KAiwLj2evEmmBRA",
+          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWVsIiwiaWF0IjoxNjU3Mjg0NDgxLCJleHAiOjE2NTk4NzY0ODF9.SLJgJ-q3jJlZoRRa-pzeqAmoM_yvtk5ythDFB1EN6O9YTWeEsOVEx3UDX9Fj_M72xTCmUkpvdov_xXXmPTv_6g",
         },
       
     })
@@ -29,7 +29,20 @@ export const addEmployeeApi = ( data ) => {
       url: 'api/employee/delete/'+id,
       method: 'DELETE',
       headers: {
-        Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWVsIiwiaWF0IjoxNjU3MDM2NjU0LCJleHAiOjE2NTcxMjMwNTR9.rN592kU1JVQtV3ELlXnFXnvvIu5b0u4ZJ7O982i-7UuwhOO2nDtDT28bn1O8nUSkWYYIbO1KAiwLj2evEmmBRA",
+        Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWVsIiwiaWF0IjoxNjU3Mjg0NDgxLCJleHAiOjE2NTk4NzY0ODF9.SLJgJ-q3jJlZoRRa-pzeqAmoM_yvtk5ythDFB1EN6O9YTWeEsOVEx3UDX9Fj_M72xTCmUkpvdov_xXXmPTv_6g",
       },
+    })
+  };
+
+  export const EditEmployeeApi = ( id,data ) => {
+    return execRequest({
+      baseURL: URL,
+      url: 'api/employee/edit/'+id,
+      method: 'PUT',
+      data,
+        headers: {
+          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWVsIiwiaWF0IjoxNjU3Mjg0NDgxLCJleHAiOjE2NTk4NzY0ODF9.SLJgJ-q3jJlZoRRa-pzeqAmoM_yvtk5ythDFB1EN6O9YTWeEsOVEx3UDX9Fj_M72xTCmUkpvdov_xXXmPTv_6g",
+        },
+      
     })
   };

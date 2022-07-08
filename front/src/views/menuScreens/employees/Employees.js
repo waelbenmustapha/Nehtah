@@ -17,6 +17,10 @@ function Employees() {
 
   //Selected Employee to Edit Delete
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  //Set if edit or add modal to be shown
+  const [isEdit,setIsEdit]=useState(false);
+
   //Employees list to fill later with Get api
   const [employees, setEmployees] = useState([]);
 
@@ -33,6 +37,7 @@ function Employees() {
   return (
     <EmployeeContext.Provider
       value={{
+        isEdit,
         show,
         setShow,
         getcurrentEmployees,
@@ -46,7 +51,7 @@ function Employees() {
         <AddEmployeeModal />
         <DeleteEmployeeModal />
         <div className="ttp">
-          <div className="centerimgandtext" onClick={() => setShow(true)}>
+          <div className="centerimgandtext" onClick={() => {setShow(true);setIsEdit(false)}}>
             <img
               alt="plus icon to add employee"
               src={plus}
@@ -86,6 +91,11 @@ function Employees() {
                   </td>
                   <td className="cell">
                     <img
+                    onClick={()=>{
+                      setSelectedEmployee(el);
+                      setIsEdit(true);
+                      setShow(true);
+                    }}
                       alt="Edit employee modal"
                       src={edit}
                       className="iconfiltercolor"
