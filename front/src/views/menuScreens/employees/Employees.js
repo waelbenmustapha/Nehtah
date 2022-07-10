@@ -8,6 +8,7 @@ import AddEmployeeModal from "../../../components/employees/modals/AddEmployeeMo
 import { getEmployees } from "../../../api/Employee";
 import { EmployeeContext } from "../../../contexts/EmployeeContext";
 import DeleteEmployeeModal from "../../../components/employees/modals/DeleteEmployeeModal";
+import { useAuth } from "../../../contexts/AuthContext";
 function Employees() {
   //Show or hide Add Modal
   const [show, setShow] = useState(false);
@@ -23,13 +24,22 @@ function Employees() {
 
   //Employees list to fill later with Get api
   const [employees, setEmployees] = useState([]);
-
+  const auth = useAuth()
   //set Employee id to delete
   //Function to fill epmployees list
-  async function getcurrentEmployees() {
-    setEmployees(await getEmployees());
-  }
 
+  async function getcurrentEmployees() {
+    auth.setLoading(true);
+    await getEmployees()
+      .then((res) => {
+        setEmployees(res);
+        auth.setLoading(false);
+      })
+      .catch((err) => {
+        alert("حدث خطأ");
+        auth.setLoading(false);
+      });
+  }
   useEffect(() => {
     getcurrentEmployees();
   }, []);

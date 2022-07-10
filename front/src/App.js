@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { dashboardroutes, routes } from "./utils/routes";
 import Main from "./views/main/Main";
+import { AuthProvider } from "./contexts/AuthContext";
+import { RequireAuth } from "./components/auth/RequireAuth";
 
 const App = () => {
 
@@ -20,6 +22,7 @@ const App = () => {
   };
 
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         {getRoutes()}
@@ -27,11 +30,12 @@ const App = () => {
         path="*"
         element={<Navigate to="dashboard/home" replace />}
     />
-        <Route path={"dashboard"} element={<Main />}>
+        <Route path={"dashboard"} element={<RequireAuth><Main /></RequireAuth>}>
           {getDashboardRoutes()}
         </Route>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 };
 

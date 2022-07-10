@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import { addEmployeeApi, EditEmployeeApi } from "../../../api/Employee";
 import ImageUpload from "../../../utils/ImageUpload";
 import { EmployeeContext } from "../../../contexts/EmployeeContext";
+import { useAuth } from "../../../contexts/AuthContext";
 
 //Begin
 
@@ -20,6 +21,7 @@ function AddEmployeeModal() {
     selectedEmployee,
   } = useContext(EmployeeContext);
 
+  const auth = useAuth()
   useEffect(() => {
     SetEmployeedata(
       selectedEmployee
@@ -63,31 +65,48 @@ function AddEmployeeModal() {
     ) {
       alert("الرجاء التأكد من المعلومات");
     } else {
-      if(!isEdit){
-      await addEmployeeApi({ ...employeedata, image }).then(() => {
-        getcurrentEmployees();
-        handleClose();
-        SetEmployeedata({
-          firstname: "",
-          lastname: "",
-          phonenumber: "",
+      if (!isEdit) {
+        auth.setLoading(true);
+
+        await addEmployeeApi({ ...employeedata, image })
+          .then(() => {
+            getcurrentEmployees();
+            auth.setLoading(false);
+            handleClose();
+            SetEmployeedata({
+              firstname: "",
+              lastname: "",
+              phonenumber: "",
+            });
+            setImage("");
+          })
+          .catch((err) => {
+            alert("حدث خطأ");
+            auth.setLoading(false);
+          });
+      } else {
+        auth.setLoading(true);
+
+        await EditEmployeeApi(selectedEmployee.id, {
+          ...employeedata,
+          image,
+        }).then(() => {
+          getcurrentEmployees();
+          auth.setLoading(false);
+
+          SetEmployeedata({
+            firstname: "",
+            lastname: "",
+            phonenumber: "",
+          });
+          setImage("");
+          handleClose();
+        }).catch((err) => {
+          alert("حدث خطأ");
+          auth.setLoading(false);
         });
-        setImage("");
-      });
-    }else{
-      await EditEmployeeApi(selectedEmployee.id,{ ...employeedata, image }).then(() => {
-        getcurrentEmployees();
-        SetEmployeedata({
-          firstname: "",
-          lastname: "",
-          phonenumber: "",
-        });
-        setImage("");
-        handleClose();
-       
-      });
+      }
     }
-  }
   };
 
   return (

@@ -1,3 +1,4 @@
+import { RequireAuth } from "../components/auth/RequireAuth";
 import Dashboard from "../views/menuScreens/dashboard/Dashboard";
 import Employees from "../views/menuScreens/employees/Employees";
 import Orders from "../views/menuScreens/orders/Orders";
@@ -20,14 +21,14 @@ export const routes = [
 export const dashboardroutes = [
     {
         path: "home",
-        component: <Dashboard />,
+        component: <RequireAuth><Dashboard /></RequireAuth>,
       },
       {
         path: "employees",
-        component: <Employees />,
+        component: <RequireAuth><Employees /></RequireAuth>,
       },
       {
         path: "orders",
-        component: <Orders />,
+        component: <RequireAuth><Orders /></RequireAuth>,
       },
 ]

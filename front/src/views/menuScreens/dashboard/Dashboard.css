@@ -1,0 +1,23 @@
+
+.eachepmordersdiv{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .eachepmordersdiv{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .bigcontainer{
+        width: 100%!important;
+    }
+    .screenNow{
+        height: 2500px!important;
+    }
+
+}

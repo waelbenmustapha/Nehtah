@@ -15,9 +15,11 @@ import close from "../../assets/close.png";
 import iconbrand from "../../assets/iconbrand.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 const Header = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [rtl] = useState(false);
+  const auth = useAuth()
   return (
     <ProSidebar
       image={false}
@@ -65,7 +67,7 @@ const Header = () => {
             <Link to="/dashboard/orders" />
           </MenuItem>
           <MenuItem icon={<FaGem />}>
-            Employees <Link to="/dashboard/employees" />
+            Employees <Link to="/dashboard/statistics" />
           </MenuItem>
         </Menu>
        
@@ -78,6 +80,7 @@ const Header = () => {
           padding: "15px",
           display: "flex",
           position:"absolute",
+          width:"100%",
           bottom:"0px",
           flexDirection: "row",
           justifyContent: "center",
@@ -89,6 +92,7 @@ const Header = () => {
           </div>
         )}
         <img
+        onClick={()=>auth.logout()}
           alt="exit"
           className="hoverpointer"
           src={iconbrand}

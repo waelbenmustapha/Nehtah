@@ -1,9 +1,30 @@
 .containerr{
     display: flex;
+    height: 100vh;
 }
 .screenNow{
     height: 100%;
     padding: 25px;
     width: 100%;
     margin-left: 60px;
+   
+}
+.loaderstyle{
+    position: fixed;
+    left: 50%;
+    height: 300px;
+    width: 300px;
+    z-index: 9999999;
+    border-radius: 80%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.blurme{
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    pointer-events: none;
+
 }

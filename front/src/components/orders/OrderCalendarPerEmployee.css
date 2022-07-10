@@ -10,6 +10,10 @@
   flex: 1;
 }
 
+.textresp{
+}
+
+
 .employeimgstyle {
   width: 100px;
   height: 100px;
@@ -20,7 +24,8 @@
 .calenderdiv {
   background-color: white;
   height: 100%;
-  padding: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
   flex: 1;
 }
 
@@ -399,6 +404,11 @@ A VERTICAL event
     /* arrow */
   
   }
+  .emplname{
+    text-align: center;
+padding: 5px;
+font-size: 20px;
+  }
   .fc .fc-timegrid-now-indicator-arrow {
       position: absolute;
       z-index: 4;
@@ -406,6 +416,10 @@ A VERTICAL event
       border-style: solid;
       border-color: red;
       border-color: var(--fc-now-indicator-color, red);
+    }
+    .fc-scroller::-webkit-scrollbar { /* WebKit */
+      width: 0;
+      height: 0;
     }
   .fc-direction-ltr .fc-timegrid-now-indicator-arrow {
       left: 0;
@@ -423,4 +437,65 @@ A VERTICAL event
       border-top-color: transparent;
       border-bottom-color: transparent;
     }
+   .greendot{
+    background-color: green;
+border-radius: 50%;
+width: 15px;
+height: 15px;
+   }
+    @media screen and (min-width: 2100px) {
+      .fc .fc-timegrid-slot-label-cushion {
+     font-size: 27px;
+      }
+      .greendot{
+        background-color: green;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+       }
+      /* Styles go here */
+      .textresp{
+        font-size: 30px;
+      }
+      .employeimgstyle {
+        width: 185px;
+        height: 185px;
+        align-self: center;
+        margin: 0px auto;
+        border-radius: 50%;
+      }
+      .emplname{
+        text-align: center;
+    padding: 5px;
+    font-size: 45px;
+      }
+  }
   
+  @media screen and (min-width: 3700px) {
+    /* Styles go here */
+    .textresp{
+      font-size: 45px;
+    }
+    .fc .fc-timegrid-slot-label-cushion {
+      font-size: 40px;
+       }
+    .greendot{
+      background-color: green;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+     }
+    .employeimgstyle {
+      width: 250px;
+      height: 250px;
+      align-self: center;
+      margin: 0px auto;
+      border-radius: 50%;
+    }
+    .emplname{
+      text-align: center;
+  padding: 5px;
+  font-size: 55px;
+    }
+
+}

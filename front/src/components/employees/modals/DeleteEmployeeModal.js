@@ -3,16 +3,20 @@ import { EmployeeContext } from '../../../contexts/EmployeeContext'
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { DeleteEmployee } from '../../../api/Employee';
+import { useAuth } from '../../../contexts/AuthContext';
 
 function DeleteEmployeeModal() {
   const {showDelete,setShowDelete,selectedEmployee,setSelectedEmployee,getcurrentEmployees} = useContext(EmployeeContext)
-
+const auth = useAuth();
   const handleOpenClose = () =>{
     setShowDelete(!showDelete)
     setSelectedEmployee(null)
   }
   const confirmDelete=()=>{
-    DeleteEmployee(selectedEmployee.id).then(()=> {handleOpenClose();getcurrentEmployees();setSelectedEmployee(null)}).catch((err)=>alert("an error occured while deleting user "+err))
+    auth.setLoading(true)
+    DeleteEmployee(selectedEmployee.id).then(()=> {handleOpenClose();getcurrentEmployees();setSelectedEmployee(null);auth.setLoading(false)
+    }).catch((err)=>{alert("حدث خطأ اثناء حذف العامل"+err);auth.setLoading(false)
+  })
    
   }
 

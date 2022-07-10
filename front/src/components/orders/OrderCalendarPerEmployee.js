@@ -3,23 +3,46 @@ import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import timeGridPlugin from "@fullcalendar/timegrid";
 
 import "./OrderCalendarPerEmployee.css";
-import arLocale from '@fullcalendar/core/locales/ar';
+import arLocale from "@fullcalendar/core/locales/ar";
 function OrderCalendarPerEmployee({ employee }) {
+  function renderEventContent(eventInfo) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+          overflow: "hidden",
+        }}
+        onClick={() => console.log(eventInfo)}
+      >
+        <div className="textresp">{eventInfo.timeText}</div>
+        <div
+         className="textresp" style={{fontWeight:"bold",flexDirection:"row",display:"flex",justifyContent:"space-between"}}
+        >
+      <span >{JSON.parse(eventInfo.event.title).description}</span>
+       <span style={{marginRight:"15px"}}>{JSON.parse(eventInfo.event.title).name}</span>
+        </div>
+        {!eventInfo.isFuture && !eventInfo.isPast && (
+          <div
+           className="greendot"
+          ></div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="bigcontainer">
-      <img
-      alt="employee"
-        src={employee.image}
-        className="employeimgstyle"
-      /><p style={{textAlign:"center",padding:"5px",fontSize:"20px"}}>{employee.firstname}</p>
+      <img alt="employee" src={employee.image} className="employeimgstyle" />
+      <p className="emplname">{employee.firstname}</p>
 
       <div className="calenderdiv">
         <FullCalendar
-              contentHeight={'auto'}
-
-        direction="rtl"
-        locale={arLocale}
-    selectable={true}
+          direction="rtl"
+          locale={arLocale}
           nowIndicator={true}
           eventBackgroundColor="rgba(178,28,29,0.4)"
           eventTextColor="black"
@@ -48,13 +71,3 @@ function OrderCalendarPerEmployee({ employee }) {
 }
 
 export default OrderCalendarPerEmployee;
-
-function renderEventContent(eventInfo) {
-
-  return (
-    <div style={{display:"flex",flexDirection:"row",justifyContent:"space-around",alignItems:"center",overflow:"hidden"}} onClick={()=>console.log(eventInfo)}>
-      <div>{eventInfo.timeText}</div>
-      <div style={{fontSize:"16px",fontWeight:"500",textOverflow:"ellipsis"}}>{eventInfo.event.title}</div>{(!eventInfo.isFuture&&!eventInfo.isPast)&&<div style={{backgroundColor:"green",borderRadius:"50%",width:"15px",height:"15px"}}></div>}   
-    </div>
-  );
-}

@@ -25,7 +25,7 @@ function AddOrderModal({
     addOrderToEmployeeApi(selectedEmployee.id, {
       start: moment(info.start).utcOffset(0, true).format()  ,
       end: moment(info.end).utcOffset(0, true).format() ,
-      title: customer,
+      title: JSON.stringify({description:"object",name:"name"}),
     }).then((res) => {
       getcurrentEmployees();
       handleOpenClose();

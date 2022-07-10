@@ -1,42 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { getEmployees } from "../../../api/Employee";
 import OrderCalendarPerEmployee from "../../../components/orders/OrderCalendarPerEmployee";
-
+import { useAuth } from "../../../contexts/AuthContext";
+import "./Dashboard.css";
 function Dashboard() {
-
-const [employees,setEmployees]=useState([]);
-
-async function getEmployes(){
-  setEmployees(await getEmployees());
-  console.log(await getEmployees());
+  const [employees, setEmployees] = useState([]);
+  const auth = useAuth();
+  async function getEmployes() {
+    await getEmployees()
+      .then((res) => {
+        setEmployees(res);
+        auth.setLoading(false);
+      })
+      .catch((err) => {
+        alert("حدث خطأ");
+        auth.setLoading(false);
+      });
   }
 
-useEffect(() => {
-  getEmployes();
+  useEffect(() => {
+    auth.setLoading(true);
 
-  const interval = setInterval(() => {
     getEmployes();
 
-  }, 5000);
+    const interval = setInterval(() => {
+      getEmployes();
+    }, 5000);
 
-  return () => clearInterval(interval); // 
-}, [])
-
+    return () => clearInterval(interval); //
+  }, []);
 
   return (
-    <div
-      style={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "row",
-        gap: "10px",
-      }}
-    >
-      {employees.map((employee)=><OrderCalendarPerEmployee employee={employee} events={employee.events}/>
-)}
+    <div className="eachepmordersdiv">
+      {employees.map((employee) => (
+        <OrderCalendarPerEmployee
+          employee={employee}
+          events={employee.events}
+        />
+      ))}
     </div>
   );
 }
 
 export default Dashboard;
-
